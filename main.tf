@@ -7,7 +7,13 @@ resource "aws_s3_bucket" "codepipeline_artifacts" {
 }
 
 resource "aws_s3_bucket" "test_bucket" {
-  bucket = "test_bucket"
+  bucket = "test-bucket"
+  acl = "private"
+  force_destroy = true
+}
+
+resource "aws_s3_bucket" "test_bucket_2" {
+  bucket = "test-bucket-2"
   acl = "private"
   force_destroy = true
 }
@@ -107,7 +113,7 @@ resource "aws_iam_role_policy_attachment" "tf-cicd-codebuild-attachment2" {
 }
 
 resource "aws_codebuild_project" "tf-plan" {
-  name          = "tf-cicd-plan2"
+  name          = "tf-cicd-plan"
   description   = "Plan stage for terraform"
   service_role  = aws_iam_role.tf-codebuild-role.arn
 
