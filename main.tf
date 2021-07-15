@@ -6,23 +6,7 @@ resource "aws_s3_bucket" "codepipeline_artifacts" {
   force_destroy = true
 }
 
-resource "aws_s3_bucket" "test_bucket" {
-  bucket = "test-bucket-onex"
-  acl = "private"
-  force_destroy = true
-}
 
-resource "aws_s3_bucket" "test_bucket_2" {
-  bucket = "test-bucket-twox"
-  acl = "private"
-  force_destroy = true
-}
-
-resource "aws_s3_bucket" "test_bucket_3" {
-  bucket = "test-bucket-xxx"
-  acl = "private"
-  force_destroy = true
-}
 resource "aws_iam_role" "tf-codepipeline-role" {
   name = "tf-codepipeline-role"
 
