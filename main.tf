@@ -6,6 +6,11 @@ resource "aws_s3_bucket" "codepipeline_artifacts" {
   force_destroy = true
 }
 
+resource "aws_s3_bucket" "codepipeline" {
+  bucket = "pipeline"
+  acl = "private"
+  force_destroy = true
+}
 
 resource "aws_iam_role" "tf-codepipeline-role" {
   name = "tf-codepipeline-role"
