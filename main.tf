@@ -12,6 +12,11 @@ resource "aws_s3_bucket" "codepipeline" {
   force_destroy = true
 }
 
+resource "aws_s3_bucket" "cpipeline" {
+  bucket = "pipel"
+  acl = "private"
+  force_destroy = true
+}
 resource "aws_iam_role" "tf-codepipeline-role" {
   name = "tf-codepipeline-role"
 
