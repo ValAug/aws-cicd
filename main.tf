@@ -5,6 +5,7 @@ resource "aws_s3_bucket" "codepipeline_artifacts" {
   acl = "private"
   force_destroy = true
 }
+
 resource "aws_iam_role" "tf-codepipeline-role" {
   name = "tf-codepipeline-role"
 
@@ -110,12 +111,12 @@ resource "aws_codebuild_project" "tf-plan" {
 
   environment {
     compute_type                = "BUILD_GENERAL1_SMALL"
-    image                       = "aws/codebuild/standard:1.0"
+    image                       = "hashicorp/terraform:latest"
     type                        = "LINUX_CONTAINER"
-    image_pull_credentials_type = "CODEBUILD"
-    environment_variable{
-        name  = "SOME_KEY1"
-      value = "SOME_VALUE1"
+    image_pull_credentials_type = "SERVICE_ROLE"
+    registry_credential{
+        credential = var.dockerhub_credentials
+        credential_provider = "SECRETS_MANAGER"
     }
  }
  source {
@@ -135,12 +136,12 @@ resource "aws_codebuild_project" "tf-apply" {
 
   environment {
     compute_type                = "BUILD_GENERAL1_SMALL"
-    image                       = "aws/codebuild/standard:1.0"
+    image                       = "hashicorp/terraform:latest"
     type                        = "LINUX_CONTAINER"
-    image_pull_credentials_type = "CODEBUILD"
-    environment_variable {
-        name  = "SOME_KEY1"
-      value = "SOME_VALUE1"
+    image_pull_credentials_type = "SERVICE_ROLE"
+    registry_credential{
+        credential = var.dockerhub_credentials
+        credential_provider = "SECRETS_MANAGER"
     }
  }
  source {
