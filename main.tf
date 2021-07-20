@@ -3,7 +3,7 @@
 resource "aws_s3_bucket" "codepipeline_artifacts" {
   bucket = "pipeline-artifacts-uhn"
   acl = "private"
-  force_destroy = true
+  force_destroy = false
 }
 
 resource "aws_iam_role" "tf-codepipeline-role" {
